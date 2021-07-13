@@ -1,0 +1,6 @@
+<launch>
+    <node pkg = "joy" type = "joy_node" name = "joy_node"/>
+        <param name = "/joy_node/autorepeat_rate" value = "50"/>
+    <node pkg = "rrm9" type = "xbox_ctr.py" name = "xbox_ctr"/>
+    <node pkg = "rrm9" type = "jetson.py" name = "jetson" output = "screen"/>
+</launch>
