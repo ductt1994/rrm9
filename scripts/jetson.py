@@ -14,7 +14,7 @@ myKit.servo[0].set_pulse_width_range(min_range,max_range)
 myKit.servo[0].actuation_range = 180
 
 #Setup the steering ranges
-offset = -2
+offset = -4
 # myKit.servo[0].angle = 90 + offset      #90 deg --> neutral position
 neutral_ang = 90 + offset
 amp = 45
