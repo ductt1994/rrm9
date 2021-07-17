@@ -3,9 +3,6 @@ import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
 from adafruit_servokit import ServoKit
-<<<<<<< HEAD
-import time
-=======
 
 #Setup the Servo channels
 myKit = ServoKit(channels=16)
@@ -21,7 +18,6 @@ offset = 2
 # myKit.servo[0].angle = 90 + offset      #90 deg --> neutral position
 neutral_ang = 90 + offset
 amp = 45
->>>>>>> 9a95729ce4fc53bcff74fef643849abee4a3b094
 
 #Subscriber Function to process the xbox controller values
 def convert(data):
