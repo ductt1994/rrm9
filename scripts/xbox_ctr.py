@@ -16,7 +16,8 @@ def start():
     
     #Define the topic name and message type
     global pub
-    pub = rospy.Publisher('xbox2jetson', Twist, queue_size = 1)
+    # pub = rospy.Publisher('xbox2jetson', Twist, queue_size = 1)
+    pub = rospy.Publisher('xbox2jetson', Twist)
 
     #Xbox_ctr node gets its values from the Joy-Node and publishes afterwards
     rospy.Subscriber("joy", Joy, callback)
