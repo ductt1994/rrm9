@@ -1,5 +1,6 @@
 import numpy as np
 import cv2 as cv
+import cam_params
 
 # Set the camera parameters
 dispW = 320
