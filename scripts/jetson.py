@@ -17,6 +17,7 @@ myKit.servo[0].actuation_range = 180
 offset = -4
 # myKit.servo[0].angle = 90 + offset      #90 deg --> neutral position
 neutral_ang = 90 + offset
+#Amplitude
 amp = 45
 
 #Subscriber Function to process the xbox controller values
