@@ -22,6 +22,7 @@ elif camera == 2:
             "! video/x-raw, format=BGR "
             "! appsink").format(cp.capture_width,cp.capture_height,cp.capture_fps,
                                 cp.display_width,cp.display_height,cp.display_fps)
+print(camSet)
 
 #Create OpenCV capture object
 cap = cv.VideoCapture(camSet)
