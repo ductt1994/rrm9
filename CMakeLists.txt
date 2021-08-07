@@ -163,6 +163,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/xbox_ctr.py
   scripts/jetson.py
+  scripts/cam_test.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

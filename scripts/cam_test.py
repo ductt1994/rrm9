@@ -1,47 +1,69 @@
-import numpy as np
-import cv2 as cv
-import cam_params as cp
+#!/usr/bin/env python
 
-#Chose camera
-#camera 1: Acer swift 3 webcam
-#camera 2: IMX219
-camera = 1
+# import numpy as np
+# import cv2 as cv
+# import cam_params as cp
 
-#Create camera settings as formatted string
-if camera == 1:
-    camSet = ("v4l2src "
-          "! videoconvert "
-          "! video/x-raw, width={}, height={}, framerate={}/1 "
-          "! appsink").format(cp.capture_width,cp.capture_height,cp.capture_fps)
-elif camera == 2:
-    camSet = ("nvarguscamerasrc "
-            "! video/x-raw(memory:NVMM), width={}, height={}, format=NV12, framerate={}/1 "
-            "! nvvidconv "
-            "! video/x-raw, width={}, height={}, framerate={}/1, format=BGRx "
-            "! videoconvert "
-            "! video/x-raw, format=BGR "
-            "! appsink").format(cp.capture_width,cp.capture_height,cp.capture_fps,
-                                cp.display_width,cp.display_height,cp.display_fps)
-print(camSet)
+# #Chose camera
+# #camera 1: Acer swift 3 webcam
+# #camera 2: IMX219
+# camera = 1
 
-#Create OpenCV capture object
-cap = cv.VideoCapture(camSet)
+# #Create camera settings as formatted string
+# if camera == 1:
+#     camSet = ("v4l2src "
+#           "! videoconvert "
+#           "! video/x-raw, width={}, height={}, framerate={}/1 "
+#           "! appsink").format(cp.capture_width,cp.capture_height,cp.capture_fps)
+# elif camera == 2:
+#     camSet = ("nvarguscamerasrc "
+#             "! video/x-raw(memory:NVMM), width={}, height={}, format=NV12, framerate={}/1 "
+#             "! nvvidconv "
+#             "! video/x-raw, width={}, height={}, framerate={}/1, format=BGRx "
+#             "! videoconvert "
+#             "! video/x-raw, format=BGR "
+#             "! appsink").format(cp.capture_width,cp.capture_height,cp.capture_fps,
+#                                 cp.display_width,cp.display_height,cp.display_fps)
+# print(camSet)
 
-#Check if camera data can be accessed
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    # Check for return value errors and read each frame
-    ret, frame = cap.read()
-    if not ret:
-        print("Can't receive frame (stream end?). Exiting ...")
-        break
-    # Display frame until "q" is pressed
-    cv.imshow('frame', frame)
-    if cv.waitKey(1) == ord('q'):
-        break
+# #Create OpenCV capture object
+# cap = cv.VideoCapture(camSet)
 
-#Release resources
-cap.release()
-cv.destroyAllWindows()
+# #Check if camera data can be accessed
+# if not cap.isOpened():
+#     print("Cannot open camera")
+#     exit()
+# while True:
+#     # Check for return value errors and read each frame
+#     ret, frame = cap.read()
+#     if not ret:
+#         print("Can't receive frame (stream end?). Exiting ...")
+#         break
+#     # Display frame until "q" is pressed
+#     cv.imshow('frame', frame)
+#     if cv.waitKey(1) == ord('q'):
+#         break
+
+# #Release resources
+# cap.release()
+# cv.destroyAllWindows()
+
+import rospy
+from std_msgs.msg import String
+import rrm9.cam_params as cp 
+
+def talker():
+    pub = rospy.Publisher('chatter', String, queue_size=10)
+    rospy.init_node('talker', anonymous=True)
+    rate = rospy.Rate(10) # 10hz
+    while not rospy.is_shutdown():
+        hello_str = "hello world FPS: %s" % cp.capture_fps
+        rospy.loginfo(hello_str)
+        pub.publish(hello_str)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
