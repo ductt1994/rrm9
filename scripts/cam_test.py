@@ -7,7 +7,7 @@ import rrm9.cam_params as cp
 #Chose camera
 #camera 1: Acer swift 3 webcam
 #camera 2: IMX219
-camera = 2
+camera = 1
 
 #Create camera settings as formatted string
 if camera == 1:
