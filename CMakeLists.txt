@@ -168,6 +168,7 @@ catkin_install_python(PROGRAMS
   scripts/jetson.py
   scripts/cam_test.py
   scripts/cam_pub.py
+  scripts/cam_sub.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
