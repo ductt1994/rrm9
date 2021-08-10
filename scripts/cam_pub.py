@@ -49,15 +49,15 @@ class CameraPublisher:
             # Convert image with ROS compability and display the stream
             img_msg = self.bridge.cv2_to_imgmsg(frame,"bgr8")
             self.pub.publish(img_msg)
-            cv.imshow("frame",frame)
-            if cv.waitKey(1) == ord('q'):
-                break
+            # cv.imshow("frame",frame)
+            # if cv.waitKey(1) == ord('q'):
+                # break
 
             self.rate.sleep()
 
         #Release resources
         self.cap.release()
-        cv.destroyAllWindows()
+        # cv.destroyAllWindows()
 
 if __name__ == "__main__":
     cam = CameraPublisher(cp)
