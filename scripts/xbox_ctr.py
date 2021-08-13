@@ -21,8 +21,8 @@ def start():
     #Xbox_ctr node gets its values from the Joy-Node and publishes afterwards
     rospy.Subscriber("joy", Joy, callback)
 
-    #Publish the msg with a rate of 50 Hz
-    rospy.Rate(50)
+    #Publish the msg with a rate of 60 Hz
+    rospy.Rate(60)
     rospy.spin()
 
 if __name__ == '__main__':
