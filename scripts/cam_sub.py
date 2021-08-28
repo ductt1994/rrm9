@@ -14,7 +14,7 @@ home_dir = os.getenv("HOME")
 bag_dir = ("/bagfiles/")
 
 now = datetime.now()
-dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
+dt_string = now.strftime("%Y%m%d%H%M%S")
 bag_name = dt_string + ".bag"
 bag_full_path = home_dir + bag_dir + bag_name
 bag = rosbag.Bag(bag_full_path, 'w')
@@ -39,7 +39,7 @@ class ImageConverter:
         if data.buttons[0] == 1:
             #A-Button
             # self.capstate = 1
-            self.bridge = CvBridge()
+            # self.bridge = CvBridge()
             self.sub_img = rospy.Subscriber("cam_imgs", Image, self.convert)
         elif data.buttons[1] == 1: 
             #B-Button
