@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import os
+import cv2 as cv
 import cv_bridge
 import rospy
 import numpy as np
-import cv2 as cv
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError 
 from sensor_msgs.msg import Joy
@@ -14,7 +14,7 @@ home_dir = os.getenv("HOME")
 bag_dir = ("/bagfiles/")
 
 now = datetime.now()
-dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
 bag_name = dt_string + ".bag"
 bag_full_path = home_dir + bag_dir + bag_name
 bag = rosbag.Bag(bag_full_path, 'w')
