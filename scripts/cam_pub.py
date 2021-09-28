@@ -10,10 +10,10 @@ from cv_bridge import CvBridge, CvBridgeError
 #Chose camera settings
 #camera 1: Acer swift 3 webcam
 #camera 2: IMX219
-camera = 1
+camera = 2
 
 #Create camera settings as formatted string
-if camera == 2:
+if camera == 1:
     camSet = ("v4l2src "
           "! videoconvert "
           "! video/x-raw, width={}, height={}, framerate={}/1 "
