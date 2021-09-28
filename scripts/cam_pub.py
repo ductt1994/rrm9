@@ -13,7 +13,7 @@ from cv_bridge import CvBridge, CvBridgeError
 camera = 1
 
 #Create camera settings as formatted string
-if camera == 1:
+if camera == 2:
     camSet = ("v4l2src "
           "! videoconvert "
           "! video/x-raw, width={}, height={}, framerate={}/1 "
