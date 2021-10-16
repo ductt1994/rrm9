@@ -21,39 +21,22 @@ bag = rosbag.Bag(bag_full_path, 'w')
 
 class ImageConverter:
     def __init__(self):
-        # self.capstate = 0
         rospy.init_node("cam_sub",anonymous=True)
         self.sub_ctr = rospy.Subscriber("joy", Joy, self.checkstate)
         rospy.spin()
 
-        # while not rospy.is_shutdown():
-        #     # print(self.capstate)
-        #     if self.capstate == 1:
-        #         self.bridge = CvBridge()
-        #         self.sub_img = rospy.Subscriber("cam_imgs", Image, self.convert)
-        #     elif self.capstate == 2:
-        #         break
-
     def checkstate(self,data):
-        # print(data.buttons[0], data.buttons[1])
         if data.buttons[0] == 1:
             #A-Button
-            # self.capstate = 1
-            # self.bridge = CvBridge()
-            self.sub_img = rospy.Subscriber("cam_imgs", Image, self.convert)
+            self.bridge = CvBridge()
+            self.sub_img = rospy.Subscriber("cam_imgs", Image, self.write2bag)
         elif data.buttons[1] == 1: 
             #B-Button
-            # self.capstate = 2
             bag.close()
             rospy.signal_shutdown("User pressed 'B'")
         
-    def convert(self,img_data):
-        # cv_img = self.bridge.imgmsg_to_cv2(img_data, "bgr8")
-        # cv.imshow("conv_img",cv_img)
-        # cv.waitKey(1)
-
+    def write2bag(self,img_data):
         bag.write("cam_imgs",img_data)
 
 if __name__ == "__main__":
     img_sub = ImageConverter()
-    # cv.destroyAllWindows()
