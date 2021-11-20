@@ -11,12 +11,17 @@ res_fps_dict = {"8MP" : {"width" : 3264, "height" : 2464, "fps" : 21},
                 "WebcamL" : {"width" : 640, "height" : 480, "fps" : 30}}
 
 #Select a capturing mode
-mode = "1MP_b"
+mode = "8MP"
 capture_width = res_fps_dict[mode]["width"]
 capture_height = res_fps_dict[mode]["height"]
 capture_fps = res_fps_dict[mode]["fps"]
 
 #Displaying parameters
-display_width = 640
-display_height = 480
+display_width = 1280
+display_height = 720
+
+if capture_width < display_width and capture_height < display_height:
+    display_width = capture_width
+    display_height = capture_height
+
 display_fps = res_fps_dict[mode]["fps"]
