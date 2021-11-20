@@ -7,10 +7,11 @@ import rrm9.cam_params as cp
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError 
 
-#Chose camera settings
-#camera 1: Acer swift 3 webcam
-#camera 2: IMX219
-camera = 2
+#Chose camera and color settings
+camera = 2      #camera 1: Acer swift 3 webcam
+                #camera 2: IMX219
+clr_mode = 0    #0->gray
+                #1->color
 
 #Create camera settings as formatted string
 if camera == 1:
@@ -47,7 +48,12 @@ class CameraPublisher:
                 print("Can't receive frame (stream end?). Exiting ...")
                 break
             # Convert image with ROS compability and display the stream
-            img_msg = self.bridge.cv2_to_imgmsg(frame,"bgr8")
+            if clr_mode == 0:
+                gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+                img_msg = self.bridge.cv2_to_imgmsg(gray,"mono8")
+            elif clr_mode == 1:
+                img_msg = self.bridge.cv2_to_imgmsg(frame,"bgr8")
+
             self.pub.publish(img_msg)
             # cv.imshow("frame",frame)
             # if cv.waitKey(1) == ord('q'):
