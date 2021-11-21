@@ -7,7 +7,7 @@ from sensor_msgs.msg import Joy
 def callback(data):
     twist = Twist()
     twist.linear.x = data.axes[1]
-    twist.angular.z = data.axes[3]
+    twist.angular.z = data.axes[2]
     pub.publish(twist)
 
 def start():
